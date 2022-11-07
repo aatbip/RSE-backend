@@ -37,6 +37,7 @@ const registration = async (req, res) => {
 const signIn = async (req, res, next) => {
   try {
     const { username, password } = req.body;
+    console.log(username, password);
     if (!username || !password) {
       res.status(400).json(failure("Please enter your credentials"));
     }

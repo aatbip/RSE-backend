@@ -24,6 +24,10 @@ const HotelSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Hotels = mongoose.model("Hotels", HotelSchema);

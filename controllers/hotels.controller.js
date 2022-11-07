@@ -37,7 +37,13 @@ const getHotelsOfUser = async (req, res) => {
 };
 
 const getAllHotels = async (req, res) => {
-  let hotels = await Hotels.find();
+  let hotels = await Hotels.find({ isVerified: true });
+
+  return res.status(200).json(success(hotels));
+};
+
+const getHotelsForAdmin = async (req, res) => {
+  let hotels = await Hotels.find({ isVerified: false });
 
   return res.status(200).json(success(hotels));
 };
@@ -50,9 +56,17 @@ const getHotelById = async (req, res) => {
   return res.status(200).json(success(hotel));
 };
 
+const acceptHotel = async (req, res) => {
+  const { id } = req.body;
+
+  await Hotels.findByIdAndUpdate(id, { isVerified: true });
+};
+
 module.exports = {
   addNewHotel,
   getHotelsOfUser,
   getAllHotels,
-  getHotelById
+  getHotelById,
+  acceptHotel,
+  getHotelsForAdmin,
 };
